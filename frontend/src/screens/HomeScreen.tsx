@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import products from '../../products';
-import Product from '../Product';
+import products from '../products';
+import Product from '../components/Product';
 
 const HomeScreen: React.FC<any> = () => {
   return (
