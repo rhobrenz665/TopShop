@@ -1,11 +1,14 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import { ProductProps } from './screens/HomeScreen';
+import Rating from './Rating';
 
-interface ProductsProps {
-  product: ProductProps;
+import { ProductsProps } from './productProps';
+
+interface ProductProps {
+  product: ProductsProps;
 }
-const Product: React.FC<ProductsProps> = ({ product }) => {
+
+const Product: React.FC<ProductProps> = ({ product }) => {
   return (
     <Card className='my-3 p-3 rounded'>
       <a href={`/product/${product._id}`}>
@@ -18,9 +21,10 @@ const Product: React.FC<ProductsProps> = ({ product }) => {
           </Card.Title>
         </a>
         <Card.Text as='div'>
-          <div className='my-3'>
-            {product.rating} from {product.numReviews}
-          </div>
+          <Rating
+            value={product.rating}
+            text={`${product.numReviews} reviews`}
+          />
         </Card.Text>
         <Card.Text as='h3'>${product.price}</Card.Text>
       </Card.Body>
