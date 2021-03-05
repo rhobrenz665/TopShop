@@ -1,14 +1,39 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
-import products from '../products';
+import axios from 'axios';
 
-interface ProductScreen {
+import { ProductsProps } from '../components/productProps';
+
+interface ProductScreens {
   match: any;
 }
 
-const ProductScreen: React.FC<ProductScreen> = ({ match }) => {
-  const product: any = products.find(p => p._id === match.params.id);
+const ProductScreen: React.FC<ProductScreens> = ({ match }) => {
+  const [product, setProduct] = useState<ProductsProps>({
+    _id: '',
+    name: '',
+    image: '',
+    description: '',
+    brand: '',
+    category: '',
+    price: 0,
+    countInStock: 0,
+    rating: 0,
+    numReviews: 0,
+  });
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+
+      setProduct(data);
+    };
+
+    fetchProduct();
+  }, []);
+
   return (
     <>
       <Link className='btn btn-light my-3' to='/'>
@@ -26,7 +51,7 @@ const ProductScreen: React.FC<ProductScreen> = ({ match }) => {
             <ListGroup.Item>
               <Rating
                 value={product.rating}
-                text={`${product.numReview} reviews`}
+                text={`${product.numReviews} reviews`}
               />
             </ListGroup.Item>
             <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
