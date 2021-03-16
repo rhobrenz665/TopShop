@@ -6,7 +6,6 @@ import Loader from '../components/Loader';
 
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';
-import { Products } from '../state';
 
 const HomeScreen: React.FC = () => {
   const { listProducts } = useActions();
