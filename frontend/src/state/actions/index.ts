@@ -7,6 +7,8 @@ import {
   ProductDetailsSuccessAction,
 } from './productActions';
 
+import { CartAddItemAction, CartRemoveItemAction } from './cartActions';
+
 export type ProductAction =
   | ProductListRequestAction
   | ProductFailAction
@@ -14,3 +16,5 @@ export type ProductAction =
   | ProductDetailsFailAction
   | ProductDetailsRequestAction
   | ProductDetailsSuccessAction;
+
+export type CartAction = CartAddItemAction | CartRemoveItemAction;
