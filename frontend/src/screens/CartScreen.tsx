@@ -29,7 +29,7 @@ const CartScreen: React.FC<CartScreenProps> = ({
     cart: { cartItems },
   } = useTypedSelector(state => state);
 
-  const { addToCart } = useActions();
+  const { addToCart, removeFromCart } = useActions();
   const productId: string = match.params.id;
 
   const qty: number = location.search
@@ -43,7 +43,7 @@ const CartScreen: React.FC<CartScreenProps> = ({
   }, [productId, qty]);
 
   const removeFromCartHandler = (id: string) => {
-    console.log('remove');
+    removeFromCart(id);
   };
 
   const checkoutHandler = () => {
@@ -91,7 +91,7 @@ const CartScreen: React.FC<CartScreenProps> = ({
                       variant='light'
                       onClick={() => removeFromCartHandler(item.product)}
                     >
-                      <i className='fas fa-trash' />
+                      <i className='fas fa-trash'></i>
                     </Button>
                   </Col>
                 </Row>

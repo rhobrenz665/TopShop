@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import { idText } from 'typescript';
 import { ActionType } from '../action-types';
 import { CartAction } from '../actions';
 
@@ -36,4 +36,16 @@ export const addToCart = (id: string, qty: number) => async (
           : error.message,
     });
   }
+};
+
+export const removeFromCart = (id: string) => async (
+  dispatch: Dispatch<CartAction>,
+  getState: any
+) => {
+  dispatch({
+    type: ActionType.CART_REMOVE_ITEM,
+    payload: id,
+  });
+
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
 };
