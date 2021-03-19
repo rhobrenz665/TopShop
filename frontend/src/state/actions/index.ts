@@ -14,6 +14,9 @@ import {
   LoginSuccessAction,
   LoginFailAction,
   LogoutAction,
+  RegisterSuccessAction,
+  RegisterFailAction,
+  RegisterRequestAction,
 } from './userActions';
 
 export type ProductAction =
@@ -26,8 +29,14 @@ export type ProductAction =
 
 export type CartAction = CartAddItemAction | CartRemoveItemAction;
 
-export type UserAction =
+export type UserLoginAction =
   | LoginRequestAction
   | LoginSuccessAction
   | LoginFailAction
   | LogoutAction;
+
+export type UserRegisterAction =
+  | RegisterSuccessAction
+  | RegisterFailAction
+  | RegisterRequestAction
+  | LoginSuccessAction;

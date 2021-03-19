@@ -11,4 +11,7 @@ export enum ActionType {
   USER_LOGIN_SUCCESS = 'user-login-success',
   USER_LOGIN_FAIL = 'user-login-fail',
   USER_LOGOUT = 'user-logout',
+  USER_REGISTER_REQUEST = 'user-register-request',
+  USER_REGISTER_FAIL = 'user-register-fail',
+  USER_REGISTER_SUCCESS = 'user-register-success',
 }

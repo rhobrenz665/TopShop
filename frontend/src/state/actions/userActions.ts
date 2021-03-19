@@ -8,6 +8,7 @@ export interface User {
   token: string | null;
 }
 
+// User Login
 export interface LoginRequestAction {
   type: ActionType.USER_LOGIN_REQUEST;
 }
@@ -24,4 +25,19 @@ export interface LoginFailAction {
 
 export interface LogoutAction {
   type: ActionType.USER_LOGOUT;
+}
+
+// User Register
+export interface RegisterRequestAction {
+  type: ActionType.USER_REGISTER_REQUEST;
+}
+
+export interface RegisterSuccessAction {
+  type: ActionType.USER_REGISTER_SUCCESS;
+  payload: User;
+}
+
+export interface RegisterFailAction {
+  type: ActionType.USER_REGISTER_FAIL;
+  payload: string;
 }

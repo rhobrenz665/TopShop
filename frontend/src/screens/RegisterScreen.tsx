@@ -7,19 +7,25 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 
-interface LoginScreenProps {
+interface RegisterScreenProps {
   location: any;
   history: any;
 }
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ location, history }) => {
-  const { login } = useActions();
+const RegisterScreen: React.FC<RegisterScreenProps> = ({
+  location,
+  history,
+}) => {
+  const { register } = useActions();
   const {
-    userLogin: { loading, error, userInfo },
+    userRegister: { loading, error, userInfo },
   } = useTypedSelector(state => state);
 
+  const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [message, setMessage] = useState<string | null>(null);
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
 
@@ -31,15 +37,29 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ location, history }) => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login(email, password);
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match');
+    } else {
+      register(name, email, password);
+    }
   };
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>Sign Up</h1>
+      {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
+        <Form.Group controlId='name'>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter name'
+            value={name}
+            onChange={e => setName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
         <Form.Group controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -58,15 +78,24 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ location, history }) => {
             onChange={e => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
+        <Form.Group controlId='confirmPassword'>
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Confirm password'
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
         <Button type='submit' variant='primary'>
-          Sign iIn
+          Register
         </Button>
       </Form>
       <Row className='py-3'>
         <Col>
-          New Customer?{' '}
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
-            Register
+          Have an Account?{' '}
+          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+            Login
           </Link>
         </Col>
       </Row>
@@ -74,4 +103,4 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ location, history }) => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
