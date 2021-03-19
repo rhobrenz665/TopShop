@@ -9,6 +9,13 @@ import {
 
 import { CartAddItemAction, CartRemoveItemAction } from './cartActions';
 
+import {
+  LoginRequestAction,
+  LoginSuccessAction,
+  LoginFailAction,
+  LogoutAction,
+} from './userActions';
+
 export type ProductAction =
   | ProductListRequestAction
   | ProductFailAction
@@ -18,3 +25,9 @@ export type ProductAction =
   | ProductDetailsSuccessAction;
 
 export type CartAction = CartAddItemAction | CartRemoveItemAction;
+
+export type UserAction =
+  | LoginRequestAction
+  | LoginSuccessAction
+  | LoginFailAction
+  | LogoutAction;

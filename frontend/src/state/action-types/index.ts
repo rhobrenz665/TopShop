@@ -7,4 +7,8 @@ export enum ActionType {
   PRODUCT_DETAILS_FAIL = 'product-details-fail',
   CART_ADD_ITEM = 'cart-add-item',
   CART_REMOVE_ITEM = 'cart-remove-item',
+  USER_LOGIN_REQUEST = 'user-login-request',
+  USER_LOGIN_SUCCESS = 'user-login-success',
+  USER_LOGIN_FAIL = 'user-login-fail',
+  USER_LOGOUT = 'user-logout',
 }
