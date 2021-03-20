@@ -17,6 +17,10 @@ import {
   RegisterSuccessAction,
   RegisterFailAction,
   RegisterRequestAction,
+  DetailsRequestAction,
+  DetailsSuccessAction,
+  DetailsFailAction,
+  DetailsResetAction,
 } from './userActions';
 
 export type ProductAction =
@@ -40,3 +44,9 @@ export type UserRegisterAction =
   | RegisterFailAction
   | RegisterRequestAction
   | LoginSuccessAction;
+
+export type UserDetailsAction =
+  | DetailsRequestAction
+  | DetailsSuccessAction
+  | DetailsFailAction
+  | DetailsResetAction;

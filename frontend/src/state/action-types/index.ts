@@ -14,4 +14,8 @@ export enum ActionType {
   USER_REGISTER_REQUEST = 'user-register-request',
   USER_REGISTER_FAIL = 'user-register-fail',
   USER_REGISTER_SUCCESS = 'user-register-success',
+  USER_DETAILS_REQUEST = 'user-details-request',
+  USER_DETAILS_FAIL = 'user-details-fail',
+  USER_DETAILS_SUCCESS = 'user-details-success',
+  USER_DETAILS_RESET = 'user-details-reset',
 }

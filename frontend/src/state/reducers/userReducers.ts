@@ -1,9 +1,19 @@
 import { ActionType } from '../action-types';
-import { UserLoginAction, UserRegisterAction } from '../actions';
-import { User } from '../actions/userActions';
+import {
+  UserLoginAction,
+  UserRegisterAction,
+  UserDetailsAction,
+} from '../actions';
+import { User, UserDetails } from '../actions/userActions';
 
-interface UserLoginState {
+interface UserState {
   userInfo: User;
+  loading?: boolean;
+  error?: string;
+}
+
+interface UserDetailsState {
+  user: UserDetails;
   loading?: boolean;
   error?: string;
 }
@@ -16,15 +26,22 @@ const userInfo = {
   token: null,
 };
 
-const initialState: UserLoginState = {
+const userDetails = {
+  _id: null,
+  name: null,
+  email: null,
+  isAdmin: null,
+};
+
+const initialState: UserState = {
   userInfo,
   loading: false,
 };
 
 export const userLoginReducer = (
-  state: UserLoginState = initialState,
+  state: UserState = initialState,
   action: UserLoginAction
-): UserLoginState => {
+): UserState => {
   switch (action.type) {
     case ActionType.USER_LOGIN_REQUEST:
       return { ...state, loading: true };
@@ -44,9 +61,9 @@ export const userLoginReducer = (
 };
 
 export const userRegisterReducer = (
-  state: UserLoginState = initialState,
+  state: UserState = initialState,
   action: UserRegisterAction
-): UserLoginState => {
+): UserState => {
   switch (action.type) {
     case ActionType.USER_REGISTER_REQUEST:
       return { ...state, loading: true };
@@ -58,6 +75,28 @@ export const userRegisterReducer = (
         loading: false,
         error: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+export const userDetailsReducer = (
+  state: UserDetailsState = { user: userDetails, loading: false },
+  action: UserDetailsAction
+): UserDetailsState => {
+  switch (action.type) {
+    case ActionType.USER_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case ActionType.USER_DETAILS_SUCCESS:
+      return { loading: false, user: action.payload };
+    case ActionType.USER_DETAILS_FAIL:
+      return {
+        user: userDetails,
+        loading: false,
+        error: action.payload,
+      };
+    case ActionType.USER_DETAILS_RESET:
+      return { user: userDetails };
     default:
       return state;
   }

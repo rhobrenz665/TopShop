@@ -20,7 +20,7 @@ export interface ProductDetailsRequestAction {
 }
 export interface ProductDetailsSuccessAction {
   type: ActionType.PRODUCT_DETAILS_SUCCESS;
-  payload: Products;
+  payload: any;
 }
 export interface ProductDetailsFailAction {
   type: ActionType.PRODUCT_DETAILS_FAIL;

@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 import { ActionType } from '../action-types';
-import { UserRegisterAction, UserLoginAction } from '../actions';
+import {
+  UserRegisterAction,
+  UserLoginAction,
+  UserDetailsAction,
+} from '../actions';
 
 export const login = (email: string, password: string) => async (
   dispatch: Dispatch<UserLoginAction>
@@ -79,6 +83,42 @@ export const register = (
   } catch (error) {
     dispatch({
       type: ActionType.USER_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getUserDetails = (id: string) => async (
+  dispatch: Dispatch<UserDetailsAction>,
+  getState: any
+) => {
+  try {
+    dispatch({
+      type: ActionType.USER_DETAILS_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/users/${id}`, config);
+
+    dispatch({
+      type: ActionType.USER_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ActionType.USER_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
