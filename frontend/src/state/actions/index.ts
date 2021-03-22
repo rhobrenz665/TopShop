@@ -7,7 +7,12 @@ import {
   ProductDetailsSuccessAction,
 } from './productActions';
 
-import { CartAddItemAction, CartRemoveItemAction } from './cartActions';
+import {
+  CartAddItemAction,
+  CartRemoveItemAction,
+  CartShippingAddressAction,
+  CartPaymentMethodAction,
+} from './cartActions';
 
 import {
   LoginRequestAction,
@@ -21,6 +26,10 @@ import {
   DetailsSuccessAction,
   DetailsFailAction,
   DetailsResetAction,
+  UpdateProfileRequestAction,
+  UpdateProfileFailAction,
+  UpdateProfileSuccessAction,
+  UpdateProfileResetAction,
 } from './userActions';
 
 export type ProductAction =
@@ -31,7 +40,11 @@ export type ProductAction =
   | ProductDetailsRequestAction
   | ProductDetailsSuccessAction;
 
-export type CartAction = CartAddItemAction | CartRemoveItemAction;
+export type CartAction =
+  | CartAddItemAction
+  | CartRemoveItemAction
+  | CartShippingAddressAction
+  | CartPaymentMethodAction;
 
 export type UserLoginAction =
   | LoginRequestAction
@@ -43,10 +56,17 @@ export type UserRegisterAction =
   | RegisterSuccessAction
   | RegisterFailAction
   | RegisterRequestAction
-  | LoginSuccessAction;
+  | LoginSuccessAction
+  | LogoutAction;
 
 export type UserDetailsAction =
   | DetailsRequestAction
   | DetailsSuccessAction
   | DetailsFailAction
   | DetailsResetAction;
+
+export type UpdateProfileAction =
+  | UpdateProfileRequestAction
+  | UpdateProfileFailAction
+  | UpdateProfileSuccessAction
+  | UpdateProfileResetAction;

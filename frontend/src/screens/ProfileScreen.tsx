@@ -11,10 +11,11 @@ interface ProfileScreen {
 }
 
 const ProfileScreen: React.FC<ProfileScreen> = ({ history }) => {
-  const { getUserDetails } = useActions();
+  const { getUserDetails, updateUserProfile } = useActions();
   const {
     userDetails: { user, loading, error },
     userLogin: { userInfo },
+    userUpdateProfile: { success },
   } = useTypedSelector(state => state);
   // state
   const [name, setName] = useState<string>('');
@@ -43,7 +44,7 @@ const ProfileScreen: React.FC<ProfileScreen> = ({ history }) => {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match');
     } else {
-      //   update profile
+      updateUserProfile({ id: user._id, name, email, password });
     }
   };
 
@@ -52,6 +53,7 @@ const ProfileScreen: React.FC<ProfileScreen> = ({ history }) => {
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
+        {success && <Message variant='success'>Profile Updated</Message>}
         {loading ? (
           <Loader />
         ) : error ? (

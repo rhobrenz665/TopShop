@@ -7,6 +7,8 @@ export enum ActionType {
   PRODUCT_DETAILS_FAIL = 'product-details-fail',
   CART_ADD_ITEM = 'cart-add-item',
   CART_REMOVE_ITEM = 'cart-remove-item',
+  CART_SAVE_SHIPPING_ADDRESS = 'cart-save-shipping-address',
+  CART_SAVE_PAYMENT_METHOD = 'cart-save-payment-method',
   USER_LOGIN_REQUEST = 'user-login-request',
   USER_LOGIN_SUCCESS = 'user-login-success',
   USER_LOGIN_FAIL = 'user-login-fail',
@@ -18,4 +20,8 @@ export enum ActionType {
   USER_DETAILS_FAIL = 'user-details-fail',
   USER_DETAILS_SUCCESS = 'user-details-success',
   USER_DETAILS_RESET = 'user-details-reset',
+  USER_UPDATE_PROFILE_REQUEST = 'user-update-profile-request',
+  USER_UPDATE_PROFILE_FAIL = 'user-update-profile-fail',
+  USER_UPDATE_PROFILE_SUCCESS = 'user-update-profile-success',
+  USER_UPDATE_PROFILE_RESET = 'user-update-profile-reset',
 }

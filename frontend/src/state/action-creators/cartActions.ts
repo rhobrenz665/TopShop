@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
-import { idText } from 'typescript';
 import { ActionType } from '../action-types';
 import { CartAction } from '../actions';
 
@@ -48,4 +47,26 @@ export const removeFromCart = (id: string) => async (
   });
 
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+};
+
+export const saveShippingAddress = (data: any) => async (
+  dispatch: Dispatch<CartAction>
+) => {
+  dispatch({
+    type: ActionType.CART_SAVE_SHIPPING_ADDRESS,
+    payload: data,
+  });
+
+  localStorage.setItem('shippingAddress', JSON.stringify(data));
+};
+
+export const savePaymentMethod = (data: string) => async (
+  dispatch: Dispatch<CartAction>
+) => {
+  dispatch({
+    type: ActionType.CART_SAVE_PAYMENT_METHOD,
+    payload: data,
+  });
+
+  localStorage.setItem('paymentMethod', JSON.stringify(data));
 };

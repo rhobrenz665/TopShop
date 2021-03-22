@@ -49,6 +49,10 @@ export interface RegisterFailAction {
   payload: string;
 }
 
+export interface LogoutAction {
+  type: ActionType.USER_LOGOUT;
+}
+
 // User Details
 export interface DetailsRequestAction {
   type: ActionType.USER_DETAILS_REQUEST;
@@ -66,4 +70,23 @@ export interface DetailsFailAction {
 
 export interface DetailsResetAction {
   type: ActionType.USER_DETAILS_RESET;
+}
+
+// update profile
+export interface UpdateProfileRequestAction {
+  type: ActionType.USER_UPDATE_PROFILE_REQUEST;
+}
+
+export interface UpdateProfileSuccessAction {
+  type: ActionType.USER_UPDATE_PROFILE_SUCCESS;
+  payload: User;
+}
+
+export interface UpdateProfileFailAction {
+  type: ActionType.USER_UPDATE_PROFILE_FAIL;
+  payload: string;
+}
+
+export interface UpdateProfileResetAction {
+  type: ActionType.USER_UPDATE_PROFILE_RESET;
 }

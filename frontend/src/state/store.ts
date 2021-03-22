@@ -7,12 +7,24 @@ const getItems: string | null = localStorage.getItem('cartItems');
 
 const getUserInfo: string | null = localStorage.getItem('userInfo');
 
+const getShippingAddress: string | null = localStorage.getItem(
+  'shippingAddress'
+);
+
 const cartItemsFromStorage = getItems ? JSON.parse(getItems) : [];
 
 const userInfoFromStorage = getUserInfo ? JSON.parse(getUserInfo) : null;
 
+const shippingAddressFromStorage = getShippingAddress
+  ? JSON.parse(getShippingAddress)
+  : {};
+
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage },
+  cart: {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+    paymentMethod: 'PayPal',
+  },
   userLogin: { userInfo: userInfoFromStorage },
 };
 

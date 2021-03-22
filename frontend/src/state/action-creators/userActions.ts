@@ -5,6 +5,7 @@ import {
   UserRegisterAction,
   UserLoginAction,
   UserDetailsAction,
+  UpdateProfileAction,
 } from '../actions';
 
 export const login = (email: string, password: string) => async (
@@ -119,6 +120,42 @@ export const getUserDetails = (id: string) => async (
   } catch (error) {
     dispatch({
       type: ActionType.USER_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateUserProfile = (user: any) => async (
+  dispatch: Dispatch<UpdateProfileAction>,
+  getState: any
+) => {
+  try {
+    dispatch({
+      type: ActionType.USER_UPDATE_PROFILE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`/api/users/profile/`, user, config);
+
+    dispatch({
+      type: ActionType.USER_UPDATE_PROFILE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ActionType.USER_UPDATE_PROFILE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
