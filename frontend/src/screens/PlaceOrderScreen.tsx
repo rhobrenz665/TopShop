@@ -8,11 +8,20 @@ import { useTypedSelector } from '../hooks/use-typed-selector';
 
 interface PlaceOrderScreenProps {
   history: any;
+  match: any;
 }
 
-const PlaceOrderScreen: React.FC<PlaceOrderScreenProps> = ({ history }) => {
-  const {} = useActions();
-  const { cart } = useTypedSelector(state => state);
+const PlaceOrderScreen: React.FC<PlaceOrderScreenProps> = ({
+  match,
+  history,
+}) => {
+  const { createOrder } = useActions();
+  const {
+    cart,
+    orderCreate: { order, success, error },
+  } = useTypedSelector(state => state);
+
+  const orderId = match.params.id;
 
   // Calculate prices
   const addDecimals = (num: any) => {
@@ -32,10 +41,22 @@ const PlaceOrderScreen: React.FC<PlaceOrderScreenProps> = ({ history }) => {
     ).toFixed(2)
   );
 
-  console.log(+(0.15 * cart.itemsPrice).toFixed(2));
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+    }
+  }, [history, success]);
 
   const placeOrderHandler = () => {
-    console.log('order');
+    createOrder({
+      orderItems: cart.cartItems,
+      shippingAddress: cart.shippingAddress,
+      paymentMethod: cart.paymentMethod,
+      itemsPrice: cart.itemsPrice,
+      shippingPrice: cart.shippingPrice,
+      taxPrice: cart.taxPrice,
+      totalPrice: cart.totalPrice,
+    });
   };
   return (
     <>
@@ -120,6 +141,9 @@ const PlaceOrderScreen: React.FC<PlaceOrderScreenProps> = ({ history }) => {
                   <Col>Total</Col>
                   <Col>${cart.totalPrice}</Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button

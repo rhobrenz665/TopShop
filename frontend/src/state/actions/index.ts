@@ -32,6 +32,15 @@ import {
   UpdateProfileResetAction,
 } from './userActions';
 
+import {
+  OrderCreateSuccessAction,
+  OrderCreateRequestAction,
+  OrderCreateFailAction,
+  OrderDetailsSuccessAction,
+  OrderDetailsFailAction,
+  OrderDetailsRequestAction,
+} from './orderActions';
+
 export type ProductAction =
   | ProductListRequestAction
   | ProductFailAction
@@ -70,3 +79,11 @@ export type UpdateProfileAction =
   | UpdateProfileFailAction
   | UpdateProfileSuccessAction
   | UpdateProfileResetAction;
+
+export type OrderAction =
+  | OrderCreateSuccessAction
+  | OrderCreateRequestAction
+  | OrderCreateFailAction
+  | OrderDetailsSuccessAction
+  | OrderDetailsRequestAction
+  | OrderDetailsFailAction;

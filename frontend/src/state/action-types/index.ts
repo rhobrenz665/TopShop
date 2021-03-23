@@ -24,4 +24,10 @@ export enum ActionType {
   USER_UPDATE_PROFILE_FAIL = 'user-update-profile-fail',
   USER_UPDATE_PROFILE_SUCCESS = 'user-update-profile-success',
   USER_UPDATE_PROFILE_RESET = 'user-update-profile-reset',
+  ORDER_CREATE_REQUEST = 'order-create-request',
+  ORDER_CREATE_SUCCESS = 'order-create-success',
+  ORDER_CREATE_FAIL = 'order-create-fail',
+  ORDER_DETAILS_REQUEST = 'order-details-request',
+  ORDER_DETAILS_SUCCESS = 'order-details-success',
+  ORDER_DETAILS_FAIL = 'order-details-fail',
 }
