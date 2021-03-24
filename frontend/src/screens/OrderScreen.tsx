@@ -1,22 +1,30 @@
-import { useEffect } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { PayPalButton } from 'react-paypal-button-v2';
 import { Link } from 'react-router-dom';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';
+import { useDispatch } from 'react-redux';
+import { ActionType } from '../state/action-types';
 
 interface OrderScreenProps {
   match: any;
+  history: any;
 }
 
-const OrderScreen: React.FC<OrderScreenProps> = ({ match }) => {
+const OrderScreen: React.FC<OrderScreenProps> = ({ match, history }) => {
   const orderId = match.params.id;
-  const { getOrderDetails } = useActions();
+  const { getOrderDetails, payOrder } = useActions();
   const {
-    cart,
+    orderPay: { order: orderPay, success: successPay, loading: loadingPay },
     orderDetails: { order, loading, error },
+    userLogin: { userInfo },
   } = useTypedSelector(state => state);
+  const dispatch = useDispatch();
+  const [sdkReady, setSdkReady] = useState<boolean>(false);
 
   if (!loading) {
     //   Calculate prices
@@ -30,10 +38,38 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ match }) => {
   }
 
   useEffect(() => {
-    if (!order || order._id !== orderId) {
-      getOrderDetails(orderId);
+    if (!userInfo) {
+      history.push('/login');
     }
-  }, [order, orderId]);
+
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get('/api/config/paypal');
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+
+    if (!order || successPay || order._id !== orderId) {
+      dispatch({ type: ActionType.ORDER_PAY_RESET });
+      getOrderDetails(orderId);
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        addPayPalScript();
+      } else {
+        setSdkReady(true);
+      }
+    }
+  }, [dispatch, order, orderId, successPay]);
+
+  const successPaymentHandler = (paymentResult: any) => {
+    console.log(paymentResult, 'payment');
+    payOrder(orderId, paymentResult);
+  };
 
   return loading ? (
     <Loader />
@@ -70,6 +106,7 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ match }) => {
                 <Message variant='danger'>Not Delivered</Message>
               )}
             </ListGroup.Item>
+
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <p>
@@ -148,6 +185,19 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ match }) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {!order.isPaid && (
+                <ListGroup.Item>
+                  {loadingPay && <Loader />}
+                  {!sdkReady ? (
+                    <Loader />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  )}
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>

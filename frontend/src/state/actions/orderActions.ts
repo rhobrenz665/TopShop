@@ -45,3 +45,19 @@ export interface OrderDetailsFailAction {
   type: ActionType.ORDER_DETAILS_FAIL;
   payload: string;
 }
+
+export interface OrderPayRequestAction {
+  type: ActionType.ORDER_PAY_REQUEST;
+}
+
+export interface OrderPaySuccessAction {
+  type: ActionType.ORDER_PAY_SUCCESS;
+  payload: any;
+}
+export interface OrderPayFailAction {
+  type: ActionType.ORDER_PAY_FAIL;
+  payload: string;
+}
+export interface OrderPayResetAction {
+  type: ActionType.ORDER_PAY_RESET;
+}

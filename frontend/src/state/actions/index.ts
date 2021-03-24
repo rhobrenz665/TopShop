@@ -39,6 +39,10 @@ import {
   OrderDetailsSuccessAction,
   OrderDetailsFailAction,
   OrderDetailsRequestAction,
+  OrderPayRequestAction,
+  OrderPaySuccessAction,
+  OrderPayFailAction,
+  OrderPayResetAction,
 } from './orderActions';
 
 export type ProductAction =
@@ -86,4 +90,8 @@ export type OrderAction =
   | OrderCreateFailAction
   | OrderDetailsSuccessAction
   | OrderDetailsRequestAction
-  | OrderDetailsFailAction;
+  | OrderDetailsFailAction
+  | OrderPayRequestAction
+  | OrderPaySuccessAction
+  | OrderPayFailAction
+  | OrderPayResetAction;

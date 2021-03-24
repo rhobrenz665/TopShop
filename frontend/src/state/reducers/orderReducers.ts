@@ -19,12 +19,12 @@ const createOrderState = {
       postalCode: '',
     },
     paymentMethod: 'PayPal',
-    // itemsPrice: 0,
-    // shippingPrice: 0,
-    // taxPrice: 0,
-    // totalPrice: 0,
-    // isPaid: false,
-    // isDelivered: false,
+    itemsPrice: 0,
+    shippingPrice: 0,
+    taxPrice: 0,
+    totalPrice: 0,
+    isPaid: false,
+    isDelivered: false,
   },
 };
 
@@ -77,6 +77,29 @@ export const orderDetailsReducer = (
         loading: false,
         error: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+export const orderPayReducer = (state: any = {}, action: OrderAction): any => {
+  switch (action.type) {
+    case ActionType.ORDER_PAY_REQUEST:
+      return {
+        loading: true,
+      };
+    case ActionType.ORDER_PAY_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case ActionType.ORDER_PAY_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case ActionType.ORDER_PAY_RESET:
+      return {};
     default:
       return state;
   }

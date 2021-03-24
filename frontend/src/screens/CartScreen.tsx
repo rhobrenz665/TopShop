@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';
@@ -36,11 +36,15 @@ const CartScreen: React.FC<CartScreenProps> = ({
     ? Number(location.search.split('=')[1])
     : 1;
 
+  const addToCartHandler = useCallback(() => {
+    addToCart(productId, qty);
+  }, [productId, qty]);
+
   useEffect(() => {
     if (productId) {
-      addToCart(productId, qty);
+      addToCartHandler();
     }
-  }, [productId, qty]);
+  }, [addToCartHandler, productId, qty]);
 
   const removeFromCartHandler = (id: string) => {
     removeFromCart(id);
