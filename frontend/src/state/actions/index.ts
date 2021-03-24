@@ -30,6 +30,7 @@ import {
   UpdateProfileFailAction,
   UpdateProfileSuccessAction,
   UpdateProfileResetAction,
+  UserListResetAction,
 } from './userActions';
 
 import {
@@ -69,7 +70,8 @@ export type UserLoginAction =
   | LoginFailAction
   | LogoutAction
   | DetailsResetAction
-  | OrderMyListResetAction;
+  | OrderMyListResetAction
+  | UserListResetAction;
 
 export type UserRegisterAction =
   | RegisterSuccessAction

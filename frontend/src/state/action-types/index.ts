@@ -38,4 +38,12 @@ export enum ActionType {
   ORDER_LIST_MY_SUCCESS = 'order-list-my-success',
   ORDER_LIST_MY_FAIL = 'order-list-my-fail',
   ORDER_LIST_MY_RESET = 'order-list-my-reset',
+  USER_LIST_REQUEST = 'user-list-request',
+  USER_LIST_FAIL = 'user-list-fail',
+  USER_LIST_SUCCESS = 'user-list-success',
+  USER_LIST_RESET = 'user-list-reset',
+
+  USER_DELETE_REQUEST = 'user-delete-request',
+  USER_DELETE_FAIL = 'user-delete-fail',
+  USER_DELETE_SUCCESS = 'user-delete-success',
 }

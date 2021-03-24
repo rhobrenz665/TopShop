@@ -54,6 +54,9 @@ export const logout = () => (dispatch: Dispatch<UserLoginAction>) => {
   dispatch({
     type: ActionType.ORDER_LIST_MY_RESET,
   });
+  dispatch({
+    type: ActionType.USER_LIST_RESET,
+  });
 };
 
 export const register = (
@@ -162,6 +165,42 @@ export const updateUserProfile = (user: any) => async (
   } catch (error) {
     dispatch({
       type: ActionType.USER_UPDATE_PROFILE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listUsers = () => async (
+  dispatch: Dispatch<any>,
+  getState: any
+) => {
+  try {
+    dispatch({
+      type: ActionType.USER_LIST_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/users/`, config);
+
+    dispatch({
+      type: ActionType.USER_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ActionType.USER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

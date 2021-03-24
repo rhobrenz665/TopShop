@@ -90,3 +90,22 @@ export interface UpdateProfileFailAction {
 export interface UpdateProfileResetAction {
   type: ActionType.USER_UPDATE_PROFILE_RESET;
 }
+
+// User List / Admin
+export interface UserListRequestAction {
+  type: ActionType.USER_LIST_REQUEST;
+}
+
+export interface UserListSuccessAction {
+  type: ActionType.USER_LIST_SUCCESS;
+  payload: any;
+}
+
+export interface UserListFailAction {
+  type: ActionType.USER_LIST_FAIL;
+  payload: string;
+}
+
+export interface UserListResetAction {
+  type: ActionType.USER_LIST_RESET;
+}
