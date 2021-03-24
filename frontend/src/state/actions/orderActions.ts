@@ -61,3 +61,19 @@ export interface OrderPayFailAction {
 export interface OrderPayResetAction {
   type: ActionType.ORDER_PAY_RESET;
 }
+
+export interface OrderMyListRequestAction {
+  type: ActionType.ORDER_LIST_MY_REQUEST;
+}
+
+export interface OrderMyListSuccessAction {
+  type: ActionType.ORDER_LIST_MY_SUCCESS;
+  payload: any;
+}
+export interface OrderMyListFailAction {
+  type: ActionType.ORDER_LIST_MY_FAIL;
+  payload: string;
+}
+export interface OrderMyListResetAction {
+  type: ActionType.ORDER_LIST_MY_RESET;
+}

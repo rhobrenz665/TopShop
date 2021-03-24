@@ -43,6 +43,10 @@ import {
   OrderPaySuccessAction,
   OrderPayFailAction,
   OrderPayResetAction,
+  OrderMyListRequestAction,
+  OrderMyListSuccessAction,
+  OrderMyListFailAction,
+  OrderMyListResetAction,
 } from './orderActions';
 
 export type ProductAction =
@@ -63,7 +67,9 @@ export type UserLoginAction =
   | LoginRequestAction
   | LoginSuccessAction
   | LoginFailAction
-  | LogoutAction;
+  | LogoutAction
+  | DetailsResetAction
+  | OrderMyListResetAction;
 
 export type UserRegisterAction =
   | RegisterSuccessAction
@@ -94,4 +100,8 @@ export type OrderAction =
   | OrderPayRequestAction
   | OrderPaySuccessAction
   | OrderPayFailAction
-  | OrderPayResetAction;
+  | OrderPayResetAction
+  | OrderMyListRequestAction
+  | OrderMyListSuccessAction
+  | OrderMyListFailAction
+  | OrderMyListResetAction;

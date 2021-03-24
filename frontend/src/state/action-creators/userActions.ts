@@ -48,6 +48,12 @@ export const logout = () => (dispatch: Dispatch<UserLoginAction>) => {
   dispatch({
     type: ActionType.USER_LOGOUT,
   });
+  dispatch({
+    type: ActionType.USER_DETAILS_RESET,
+  });
+  dispatch({
+    type: ActionType.ORDER_LIST_MY_RESET,
+  });
 };
 
 export const register = (

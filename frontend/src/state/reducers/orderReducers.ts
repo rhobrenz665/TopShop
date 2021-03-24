@@ -9,7 +9,7 @@ interface OrderState {
   error?: string;
 }
 
-const createOrderState = {
+const OrderInitialState = {
   order: {
     orderItems: [],
     shippingAddress: {
@@ -29,7 +29,7 @@ const createOrderState = {
 };
 
 export const orderCreateReducer = (
-  state: OrderState = createOrderState,
+  state: OrderState = OrderInitialState,
   action: OrderAction
 ): OrderState => {
   switch (action.type) {
@@ -56,7 +56,7 @@ export const orderCreateReducer = (
 };
 
 export const orderDetailsReducer = (
-  state: OrderState = createOrderState,
+  state: OrderState = OrderInitialState,
   action: OrderAction
 ): OrderState => {
   switch (action.type) {
@@ -100,6 +100,32 @@ export const orderPayReducer = (state: any = {}, action: OrderAction): any => {
       };
     case ActionType.ORDER_PAY_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const orderListMyReducer = (
+  state: any = { orders: [] },
+  action: OrderAction
+): any => {
+  switch (action.type) {
+    case ActionType.ORDER_LIST_MY_REQUEST:
+      return {
+        loading: true,
+      };
+    case ActionType.ORDER_LIST_MY_SUCCESS:
+      return {
+        loading: false,
+        orders: action.payload,
+      };
+    case ActionType.ORDER_LIST_MY_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case ActionType.ORDER_LIST_MY_RESET:
+      return { orders: [] };
     default:
       return state;
   }

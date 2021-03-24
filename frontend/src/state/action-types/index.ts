@@ -34,4 +34,8 @@ export enum ActionType {
   ORDER_PAY_SUCCESS = 'order-pay-success',
   ORDER_PAY_FAIL = 'order-pay-fail',
   ORDER_PAY_RESET = 'order-pay-reset',
+  ORDER_LIST_MY_REQUEST = 'order-list-my-request',
+  ORDER_LIST_MY_SUCCESS = 'order-list-my-success',
+  ORDER_LIST_MY_FAIL = 'order-list-my-fail',
+  ORDER_LIST_MY_RESET = 'order-list-my-reset',
 }
