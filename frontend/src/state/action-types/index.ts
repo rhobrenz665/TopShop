@@ -5,6 +5,9 @@ export enum ActionType {
   PRODUCT_DETAILS_REQUEST = 'product-details-request',
   PRODUCT_DETAILS_SUCCESS = 'product-details-success',
   PRODUCT_DETAILS_FAIL = 'product-details-fail',
+  PRODUCT_DELETE_REQUEST = 'product-delete-request',
+  PRODUCT_DELETE_SUCCESS = 'product-delete-success',
+  PRODUCT_DELETE_FAIL = 'product-delete-fail',
   CART_ADD_ITEM = 'cart-add-item',
   CART_REMOVE_ITEM = 'cart-remove-item',
   CART_SAVE_SHIPPING_ADDRESS = 'cart-save-shipping-address',
@@ -42,8 +45,11 @@ export enum ActionType {
   USER_LIST_FAIL = 'user-list-fail',
   USER_LIST_SUCCESS = 'user-list-success',
   USER_LIST_RESET = 'user-list-reset',
-
   USER_DELETE_REQUEST = 'user-delete-request',
   USER_DELETE_FAIL = 'user-delete-fail',
   USER_DELETE_SUCCESS = 'user-delete-success',
+  USER_UPDATE_REQUEST = 'user-update-request',
+  USER_UPDATE_SUCCESS = 'user-update-success',
+  USER_UPDATE_FAIL = 'user-update-fail',
+  USER_UPDATE_RESET = 'user-update-reset',
 }

@@ -1,6 +1,6 @@
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
+import { useHistory } from 'react-router-dom';
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';
 
@@ -9,8 +9,11 @@ const Header = () => {
 
   const { logout } = useActions();
 
+  const history = useHistory();
+
   const logoutHandler = () => {
     logout();
+    history.push('/');
   };
   return (
     <header>

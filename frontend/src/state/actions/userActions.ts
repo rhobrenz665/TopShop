@@ -4,7 +4,7 @@ export interface User {
   _id: string | null;
   name: string | null;
   email: string | null;
-  isAdmin: string | null;
+  isAdmin: boolean | null;
   token: string | null;
 }
 
@@ -12,7 +12,7 @@ export interface UserDetails {
   _id: string | null;
   name: string | null;
   email: string | null;
-  isAdmin: string | null;
+  isAdmin: boolean | null;
 }
 
 // User Login
@@ -108,4 +108,19 @@ export interface UserListFailAction {
 
 export interface UserListResetAction {
   type: ActionType.USER_LIST_RESET;
+}
+
+// User Delete / admin
+export interface UserDeleteSuccessAction {
+  type: ActionType.USER_DELETE_SUCCESS;
+  payload: any;
+}
+
+export interface UserDeleteFailAction {
+  type: ActionType.USER_DELETE_FAIL;
+  payload: string;
+}
+
+export interface UserDeleteRequestAction {
+  type: ActionType.USER_DELETE_REQUEST;
 }

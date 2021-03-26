@@ -31,6 +31,12 @@ import {
   UpdateProfileSuccessAction,
   UpdateProfileResetAction,
   UserListResetAction,
+  UserListRequestAction,
+  UserListSuccessAction,
+  UserListFailAction,
+  UserDeleteRequestAction,
+  UserDeleteSuccessAction,
+  UserDeleteFailAction,
 } from './userActions';
 
 import {
@@ -107,3 +113,14 @@ export type OrderAction =
   | OrderMyListSuccessAction
   | OrderMyListFailAction
   | OrderMyListResetAction;
+
+export type UserListAction =
+  | UserListResetAction
+  | UserListRequestAction
+  | UserListSuccessAction
+  | UserListFailAction;
+
+export type UserDeleteAction =
+  | UserDeleteRequestAction
+  | UserDeleteSuccessAction
+  | UserDeleteFailAction;

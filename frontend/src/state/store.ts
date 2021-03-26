@@ -25,7 +25,7 @@ const initialState = {
     shippingAddress: shippingAddressFromStorage,
     paymentMethod: 'PayPal',
   },
-  userLogin: { userInfo: userInfoFromStorage },
+  userLogin: { userInfo: userInfoFromStorage, loading: false, error: null },
 };
 
 export const store = createStore(

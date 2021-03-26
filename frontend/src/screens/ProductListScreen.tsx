@@ -1,26 +1,30 @@
 import { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-interface UserListScreenProps {
+interface ProductListScreenProps {
   history: any;
 }
 
-const UserListScreen: React.FC<UserListScreenProps> = ({ history }) => {
-  const { listUsers, deleteUser } = useActions();
+const ProductListScreen: React.FC<ProductListScreenProps> = ({ history }) => {
+  const { listProducts, deleteProduct } = useActions();
   const {
-    userList: { loading, error, users },
+    productList: { loading, error, products },
     userLogin: { userInfo },
-    userDelete: { success: successDelete },
+    productDelete: {
+      success: successDelete,
+      loading: loadingDelete,
+      error: errorDelete,
+    },
   } = useTypedSelector(state => state);
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      listUsers();
+      listProducts();
     } else {
       history.push('/login');
     }
@@ -28,13 +32,28 @@ const UserListScreen: React.FC<UserListScreenProps> = ({ history }) => {
 
   const deleteHandler = (id: string) => {
     if (window.confirm('Are you sure?')) {
-      deleteUser(id);
+      deleteProduct(id);
     }
+  };
+
+  const createProductHandler = (product: any) => {
+    console.log('create product');
   };
 
   return (
     <>
-      <h1>Users</h1>
+      <Row className='align-items-center'>
+        <Col>
+          <h1>Products</h1>
+        </Col>
+        <Col className='text-right'>
+          <Button className='my-3' onClick={createProductHandler}>
+            <i className='fas fa-plus' /> Create Product
+          </Button>
+        </Col>
+      </Row>
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -45,28 +64,22 @@ const UserListScreen: React.FC<UserListScreenProps> = ({ history }) => {
             <tr>
               <th>ID</th>
               <th>NAME</th>
-              <th>EMAIL</th>
-              <th>ADMIN</th>
+              <th>PRICE</th>
+              <th>CATHEGORY</th>
+              <th>BRAND</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user: any) => (
-              <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
+            {products.map(product => (
+              <tr key={product._id}>
+                <td>{product._id}</td>
+                <td>{product.name}</td>
+                <td>${product.price}</td>
+                <td>{product.category}</td>
+                <td>{product.brand} </td>
                 <td>
-                  <a href={`mailto:${user.email}`}>{user.email}</a>
-                </td>
-                <td>
-                  {user.isAdmin ? (
-                    <i className='fas fa-check' style={{ color: 'green' }}></i>
-                  ) : (
-                    <i className='fas fa-times' style={{ color: 'red' }}></i>
-                  )}
-                </td>
-                <td>
-                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
                     <Button variant='light' className='btn-sm'>
                       <i className='fas fa-edit'></i>
                     </Button>
@@ -74,7 +87,7 @@ const UserListScreen: React.FC<UserListScreenProps> = ({ history }) => {
                   <Button
                     variant='danger'
                     className='btn-sm'
-                    onClick={() => deleteHandler(user._id)}
+                    onClick={() => deleteHandler(product._id)}
                   >
                     <i className='fas fa-trash'></i>
                   </Button>
@@ -88,4 +101,4 @@ const UserListScreen: React.FC<UserListScreenProps> = ({ history }) => {
   );
 };
 
-export default UserListScreen;
+export default ProductListScreen;

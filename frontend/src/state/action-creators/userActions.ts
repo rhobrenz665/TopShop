@@ -208,3 +208,87 @@ export const listUsers = () => async (
     });
   }
 };
+
+export const deleteUser = (id: string) => async (
+  dispatch: Dispatch<any>,
+  getState: any
+) => {
+  try {
+    dispatch({
+      type: ActionType.USER_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/users/${id}`, config);
+
+    dispatch({ type: ActionType.USER_DELETE_SUCCESS });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ActionType.USER_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const updateUser = (user: any) => async (
+  dispatch: Dispatch<any>,
+  getState: any
+) => {
+  try {
+    dispatch({
+      type: ActionType.USER_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+
+    dispatch({
+      type: ActionType.USER_UPDATE_SUCCESS,
+    });
+
+    dispatch({
+      type: ActionType.USER_DETAILS_SUCCESS,
+      payload: data,
+    });
+
+    dispatch({ type: ActionType.USER_DETAILS_RESET });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ActionType.USER_UPDATE_FAIL,
+      payload: message,
+    });
+  }
+};
