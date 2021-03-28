@@ -7,15 +7,21 @@ import Loader from '../components/Loader';
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';
 
-const HomeScreen: React.FC = () => {
+interface HomeScreenProps {
+  match: any;
+}
+
+const HomeScreen: React.FC<HomeScreenProps> = ({ match }) => {
   const { listProducts } = useActions();
   const {
     productList: { products, loading, error },
   } = useTypedSelector(state => state);
 
+  const keyword: string = match.params.keyword;
+
   useEffect(() => {
-    listProducts();
-  }, []);
+    listProducts(keyword);
+  }, [keyword]);
 
   return (
     <>

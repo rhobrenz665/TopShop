@@ -3,6 +3,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';
+import SearchBox from './SearchBox';
+import { Route } from 'react-router-dom';
 
 const Header = () => {
   const { userInfo } = useTypedSelector(state => state.userLogin);
@@ -24,6 +26,7 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className='ml-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>

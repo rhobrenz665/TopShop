@@ -32,6 +32,7 @@ const productInitialState = {
     countInStock: 0,
     rating: 0,
     numReviews: 0,
+    reviews: [],
   },
 };
 
@@ -116,6 +117,21 @@ export const productUpdateReducer = (
       return { loading: false, error: action.payload };
     case ActionType.PRODUCT_UPDATE_RESET:
       return { product: {} };
+    default:
+      return state;
+  }
+};
+
+export const productReviewCreateReducer = (state: any = {}, action: any) => {
+  switch (action.type) {
+    case ActionType.PRODUCT_CREATE_REVIEW_REQUEST:
+      return { loading: true };
+    case ActionType.PRODUCT_CREATE_REVIEW_SUCCESS:
+      return { loading: false, success: true };
+    case ActionType.PRODUCT_CREATE_REVIEW_FAIL:
+      return { loading: false, error: action.payload };
+    case ActionType.PRODUCT_CREATE_REVIEW_RESET:
+      return {};
     default:
       return state;
   }
