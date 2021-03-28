@@ -17,11 +17,12 @@ interface OrderScreenProps {
 
 const OrderScreen: React.FC<OrderScreenProps> = ({ match, history }) => {
   const orderId = match.params.id;
-  const { getOrderDetails, payOrder } = useActions();
+  const { getOrderDetails, payOrder, deliverOrder } = useActions();
   const {
     orderPay: { order: orderPay, success: successPay, loading: loadingPay },
     orderDetails: { order, loading, error },
     userLogin: { userInfo },
+    orderDeliver: { loading: loadingDeliver, success: successDeliver },
   } = useTypedSelector(state => state);
   const dispatch = useDispatch();
   const [sdkReady, setSdkReady] = useState<boolean>(false);
@@ -54,8 +55,9 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ match, history }) => {
       document.body.appendChild(script);
     };
 
-    if (!order || successPay || order._id !== orderId) {
+    if (!order || successPay || successDeliver || order._id !== orderId) {
       dispatch({ type: ActionType.ORDER_PAY_RESET });
+      dispatch({ type: ActionType.ORDER_DELIVER_RESET });
       getOrderDetails(orderId);
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -64,11 +66,15 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, successPay]);
+  }, [dispatch, order, orderId, successPay, successDeliver]);
 
   const successPaymentHandler = (paymentResult: any) => {
     console.log(paymentResult, 'payment');
     payOrder(orderId, paymentResult);
+  };
+
+  const deliverHandler = () => {
+    deliverOrder(order);
   };
 
   return loading ? (
@@ -198,6 +204,21 @@ const OrderScreen: React.FC<OrderScreenProps> = ({ match, history }) => {
                   )}
                 </ListGroup.Item>
               )}
+              {loadingDeliver && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type='button'
+                      className='btn btn-block'
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>

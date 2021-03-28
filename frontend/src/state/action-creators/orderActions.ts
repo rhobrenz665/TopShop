@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { ActionType } from '../action-types';
 import { OrderAction } from '../actions';
 import { OrderCreate } from '../actions/orderActions';
+import { logout } from './userActions';
 
 export const createOrder = (order: OrderCreate) => async (
   dispatch: Dispatch<OrderAction>,
@@ -185,6 +186,49 @@ export const listOrders = () => async (
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
+    });
+  }
+};
+
+export const deliverOrder = (order: any) => async (
+  dispatch: Dispatch<any>,
+  getState: any
+) => {
+  try {
+    dispatch({
+      type: ActionType.ORDER_DELIVER_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/orders/${order._id}/deliver`,
+      {},
+      config
+    );
+    dispatch({
+      type: ActionType.ORDER_DELIVER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ActionType.ORDER_DELIVER_FAIL,
+      payload: message,
     });
   }
 };
