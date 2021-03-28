@@ -12,12 +12,12 @@ export const listProducts = () => async (dispatch: Dispatch<ProductAction>) => {
     const { data } = await axios.get('/api/products');
 
     dispatch({
-      type: ActionType.PRODUCT_SUCCESS,
+      type: ActionType.PRODUCT_LIST_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: ActionType.PRODUCT_FAIL,
+      type: ActionType.PRODUCT_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -78,6 +78,83 @@ export const deleteProduct = (id: string) => async (
   } catch (error) {
     dispatch({
       type: ActionType.PRODUCT_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createProduct = () => async (
+  dispatch: Dispatch<any>,
+  getState: any
+) => {
+  try {
+    dispatch({
+      type: ActionType.PRODUCT_CREATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.post(`/api/products/`, {}, config);
+
+    dispatch({
+      type: ActionType.PRODUCT_CREATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ActionType.PRODUCT_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateProduct = (product: any) => async (
+  dispatch: Dispatch<any>,
+  getState: any
+) => {
+  try {
+    dispatch({
+      type: ActionType.PRODUCT_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/products/${product._id}`,
+      product,
+      config
+    );
+
+    dispatch({
+      type: ActionType.PRODUCT_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ActionType.PRODUCT_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

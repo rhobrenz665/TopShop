@@ -42,9 +42,9 @@ export const productsListReducer = (
   switch (action.type) {
     case ActionType.PRODUCT_LIST_REQUEST:
       return { loading: true, products: [] };
-    case ActionType.PRODUCT_SUCCESS:
+    case ActionType.PRODUCT_LIST_SUCCESS:
       return { loading: false, products: action.payload };
-    case ActionType.PRODUCT_FAIL:
+    case ActionType.PRODUCT_LIST_FAIL:
       return {
         loading: false,
         error: action.payload,
@@ -78,15 +78,44 @@ export const productDetailsReducer = (
 export const productDeleteReducer = (state: any = {}, action: any) => {
   switch (action.type) {
     case ActionType.PRODUCT_DELETE_REQUEST:
-      return { ...state, loading: true };
+      return { loading: true };
     case ActionType.PRODUCT_DELETE_SUCCESS:
       return { loading: false, success: true };
     case ActionType.PRODUCT_DELETE_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productCreateReducer = (state: any = {}, action: any) => {
+  switch (action.type) {
+    case ActionType.PRODUCT_CREATE_REQUEST:
+      return { loading: true };
+    case ActionType.PRODUCT_CREATE_SUCCESS:
+      return { loading: false, success: true, product: action.payload };
+    case ActionType.PRODUCT_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    case ActionType.PRODUCT_CREATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const productUpdateReducer = (
+  state: any = { product: {} },
+  action: any
+) => {
+  switch (action.type) {
+    case ActionType.PRODUCT_UPDATE_REQUEST:
+      return { loading: true };
+    case ActionType.PRODUCT_UPDATE_SUCCESS:
+      return { loading: false, success: true, product: action.payload };
+    case ActionType.PRODUCT_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case ActionType.PRODUCT_UPDATE_RESET:
+      return { product: {} };
     default:
       return state;
   }

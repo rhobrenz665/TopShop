@@ -77,3 +77,16 @@ export interface OrderMyListFailAction {
 export interface OrderMyListResetAction {
   type: ActionType.ORDER_LIST_MY_RESET;
 }
+
+export interface OrderListRequestAction {
+  type: ActionType.ORDER_LIST_REQUEST;
+}
+
+export interface OrderListSuccessAction {
+  type: ActionType.ORDER_LIST_SUCCESS;
+  payload: any;
+}
+export interface OrderListFailAction {
+  type: ActionType.ORDER_LIST_FAIL;
+  payload: string;
+}

@@ -6,12 +6,12 @@ export interface ProductListRequestAction {
 }
 
 export interface ProductSuccessAction {
-  type: ActionType.PRODUCT_SUCCESS;
+  type: ActionType.PRODUCT_LIST_SUCCESS;
   payload: Products[];
 }
 
 export interface ProductFailAction {
-  type: ActionType.PRODUCT_FAIL;
+  type: ActionType.PRODUCT_LIST_FAIL;
   payload: string;
 }
 

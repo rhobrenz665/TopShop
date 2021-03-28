@@ -54,6 +54,9 @@ import {
   OrderMyListSuccessAction,
   OrderMyListFailAction,
   OrderMyListResetAction,
+  OrderListRequestAction,
+  OrderListSuccessAction,
+  OrderListFailAction,
 } from './orderActions';
 
 export type ProductAction =
@@ -112,7 +115,10 @@ export type OrderAction =
   | OrderMyListRequestAction
   | OrderMyListSuccessAction
   | OrderMyListFailAction
-  | OrderMyListResetAction;
+  | OrderMyListResetAction
+  | OrderListRequestAction
+  | OrderListSuccessAction
+  | OrderListFailAction;
 
 export type UserListAction =
   | UserListResetAction
