@@ -6,12 +6,20 @@ interface ProductState {
   products: Products[];
   loading: boolean;
   error?: string | null;
+  pages?: any;
+  page?: any;
 }
 
 interface ProductDetailsState {
   product: Products;
   loading?: boolean;
   error?: string | null;
+}
+
+interface ProductDeleteState {
+  loading: boolean;
+  error?: string | null;
+  success?: boolean;
 }
 
 const initialState: ProductState = {
@@ -44,7 +52,12 @@ export const productsListReducer = (
     case ActionType.PRODUCT_LIST_REQUEST:
       return { loading: true, products: [] };
     case ActionType.PRODUCT_LIST_SUCCESS:
-      return { loading: false, products: action.payload };
+      return {
+        loading: false,
+        products: action.payload.products,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      };
     case ActionType.PRODUCT_LIST_FAIL:
       return {
         loading: false,
@@ -76,7 +89,10 @@ export const productDetailsReducer = (
   }
 };
 
-export const productDeleteReducer = (state: any = {}, action: any) => {
+export const productDeleteReducer = (
+  state: ProductDeleteState = { loading: false, error: null },
+  action: ProductAction
+) => {
   switch (action.type) {
     case ActionType.PRODUCT_DELETE_REQUEST:
       return { loading: true };
@@ -132,6 +148,22 @@ export const productReviewCreateReducer = (state: any = {}, action: any) => {
       return { loading: false, error: action.payload };
     case ActionType.PRODUCT_CREATE_REVIEW_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const productTopRatedReducer = (
+  state: any = { products: [] },
+  action: any
+) => {
+  switch (action.type) {
+    case ActionType.PRODUCT_TOP_REQUEST:
+      return { loading: true, products: [] };
+    case ActionType.PRODUCT_TOP_SUCCESS:
+      return { loading: false, products: action.payload };
+    case ActionType.PRODUCT_TOP_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

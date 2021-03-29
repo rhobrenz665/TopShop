@@ -5,6 +5,9 @@ import {
   ProductDetailsFailAction,
   ProductDetailsRequestAction,
   ProductDetailsSuccessAction,
+  ProductDeleteRequestAction,
+  ProductDeletSuccessAction,
+  ProductDeleteFailAction,
 } from './productActions';
 
 import {
@@ -65,7 +68,10 @@ export type ProductAction =
   | ProductSuccessAction
   | ProductDetailsFailAction
   | ProductDetailsRequestAction
-  | ProductDetailsSuccessAction;
+  | ProductDetailsSuccessAction
+  | ProductDeletSuccessAction
+  | ProductDeleteRequestAction
+  | ProductDeleteFailAction;
 
 export type CartAction =
   | CartAddItemAction

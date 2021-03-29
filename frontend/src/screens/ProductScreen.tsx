@@ -16,6 +16,7 @@ import { useTypedSelector } from '../hooks/use-typed-selector';
 import { useDispatch } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 import { ActionType } from '../state';
 
 interface ProductScreens {
@@ -71,6 +72,7 @@ const ProductScreen: React.FC<ProductScreens> = ({ match, history }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />
