@@ -33,10 +33,40 @@ export interface ProductDetailsFailAction {
 export interface ProductDeleteRequestAction {
   type: ActionType.PRODUCT_DELETE_REQUEST;
 }
-export interface ProductDeletSuccessAction {
+export interface ProductDeleteSuccessAction {
   type: ActionType.PRODUCT_DELETE_SUCCESS;
 }
 export interface ProductDeleteFailAction {
   type: ActionType.PRODUCT_DELETE_FAIL;
   payload: string;
+}
+
+export interface ProductCreateRequestAction {
+  type: ActionType.PRODUCT_CREATE_REQUEST;
+}
+export interface ProductCreateSuccessAction {
+  type: ActionType.PRODUCT_CREATE_SUCCESS;
+  payload: Products;
+}
+export interface ProductCreateFailAction {
+  type: ActionType.PRODUCT_CREATE_FAIL;
+  payload: string;
+}
+export interface ProductCreateResetAction {
+  type: ActionType.PRODUCT_CREATE_RESET;
+}
+
+export interface ProductUpdateRequestAction {
+  type: ActionType.PRODUCT_UPDATE_REQUEST;
+}
+export interface ProductUpdateSuccessAction {
+  type: ActionType.PRODUCT_UPDATE_SUCCESS;
+  payload: Products;
+}
+export interface ProductUpdateFailAction {
+  type: ActionType.PRODUCT_UPDATE_FAIL;
+  payload: string;
+}
+export interface ProductUpdateResetAction {
+  type: ActionType.PRODUCT_UPDATE_RESET;
 }

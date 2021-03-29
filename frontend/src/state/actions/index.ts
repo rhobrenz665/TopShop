@@ -6,8 +6,16 @@ import {
   ProductDetailsRequestAction,
   ProductDetailsSuccessAction,
   ProductDeleteRequestAction,
-  ProductDeletSuccessAction,
+  ProductDeleteSuccessAction,
   ProductDeleteFailAction,
+  ProductCreateRequestAction,
+  ProductCreateSuccessAction,
+  ProductCreateFailAction,
+  ProductCreateResetAction,
+  ProductUpdateRequestAction,
+  ProductUpdateSuccessAction,
+  ProductUpdateFailAction,
+  ProductUpdateResetAction,
 } from './productActions';
 
 import {
@@ -69,9 +77,17 @@ export type ProductAction =
   | ProductDetailsFailAction
   | ProductDetailsRequestAction
   | ProductDetailsSuccessAction
-  | ProductDeletSuccessAction
+  | ProductDeleteSuccessAction
   | ProductDeleteRequestAction
-  | ProductDeleteFailAction;
+  | ProductDeleteFailAction
+  | ProductCreateRequestAction
+  | ProductCreateSuccessAction
+  | ProductCreateFailAction
+  | ProductCreateResetAction
+  | ProductUpdateRequestAction
+  | ProductUpdateSuccessAction
+  | ProductUpdateFailAction
+  | ProductUpdateResetAction;
 
 export type CartAction =
   | CartAddItemAction

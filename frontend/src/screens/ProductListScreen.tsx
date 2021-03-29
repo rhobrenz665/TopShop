@@ -45,7 +45,9 @@ const ProductListScreen: React.FC<ProductListScreenProps> = ({
     }
 
     if (successCreate) {
-      history.push(`/admin/product/${createdProduct._id}/edit`);
+      history.push(
+        `/admin/product/${createdProduct && createdProduct._id}/edit`
+      );
     } else {
       listProducts('', pageNumber);
     }

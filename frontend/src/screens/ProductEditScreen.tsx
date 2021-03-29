@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Button, Image } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';

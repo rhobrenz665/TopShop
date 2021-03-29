@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { logout } from './userActions';
 import { ActionType } from '../action-types';
 import { ProductAction } from '../actions';
+import { Products } from '../index';
 
 export const listProducts = (
   keyword: string = '',
@@ -58,7 +59,7 @@ export const listProductDetails = (id: string) => async (
 };
 
 export const deleteProduct = (id: string) => async (
-  dispatch: Dispatch<any>,
+  dispatch: Dispatch<ProductAction>,
   getState: any
 ) => {
   try {
@@ -93,7 +94,7 @@ export const deleteProduct = (id: string) => async (
 };
 
 export const createProduct = () => async (
-  dispatch: Dispatch<any>,
+  dispatch: Dispatch<ProductAction>,
   getState: any
 ) => {
   try {
@@ -129,7 +130,7 @@ export const createProduct = () => async (
 };
 
 export const updateProduct = (product: any) => async (
-  dispatch: Dispatch<any>,
+  dispatch: Dispatch<ProductAction>,
   getState: any
 ) => {
   try {
