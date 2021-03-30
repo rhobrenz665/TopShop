@@ -46,7 +46,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ match }) => {
       ) : (
         <>
           <Row>
-            {products.length &&
+            {products &&
+              products.length &&
               products.map(product => (
                 <Col key={product._id} sm={12} md={6} lg={4}>
                   <Product product={product} />

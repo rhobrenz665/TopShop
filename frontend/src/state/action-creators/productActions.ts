@@ -3,7 +3,6 @@ import { Dispatch } from 'redux';
 import { logout } from './userActions';
 import { ActionType } from '../action-types';
 import { ProductAction } from '../actions';
-import { Products } from '../index';
 
 export const listProducts = (
   keyword: string = '',

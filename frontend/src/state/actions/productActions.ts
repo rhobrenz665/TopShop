@@ -70,3 +70,15 @@ export interface ProductUpdateFailAction {
 export interface ProductUpdateResetAction {
   type: ActionType.PRODUCT_UPDATE_RESET;
 }
+
+export interface ProductTopRequestAction {
+  type: ActionType.PRODUCT_TOP_REQUEST;
+}
+export interface ProductTopSuccessAction {
+  type: ActionType.PRODUCT_TOP_SUCCESS;
+  payload: Products[];
+}
+export interface ProductTopFailAction {
+  type: ActionType.PRODUCT_TOP_FAIL;
+  payload: string;
+}

@@ -6,9 +6,7 @@ import Message from './Message';
 import { useActions } from '../hooks/use-actions';
 import { useTypedSelector } from '../hooks/use-typed-selector';
 
-interface ProductCarouselProps {}
-
-const ProductCarousel: React.FC<ProductCarouselProps> = () => {
+const ProductCarousel: React.FC = () => {
   const { listTopProducts } = useActions();
   const {
     productTopRated: { loading, error, products },
@@ -18,20 +16,19 @@ const ProductCarousel: React.FC<ProductCarouselProps> = () => {
     listTopProducts();
   }, []);
 
-  return loading ? (
-    <Loader />
-  ) : error ? (
-    <Message variant='danger'>{error}</Message>
-  ) : (
+  const loader = <Loader />;
+  const message = <Message variant='danger'>{error}</Message>;
+  const productCarousel = (
     <Carousel pause='hover' className='bg-dark'>
       {products &&
-        products.map((product: any) => (
-          <Carousel.Item key={product._id}>
-            <Link to={`/product/${product._id}`}>
-              <Image src={product.image} alt={product.name} fluid />
+        Array.isArray(products) &&
+        products.map(p => (
+          <Carousel.Item key={p._id}>
+            <Link to={`/product/${p._id}`}>
+              <Image src={p.image} alt={p.name} fluid />
               <Carousel.Caption className='carousel-caption'>
                 <h2>
-                  {product.name} (${product.price})
+                  {p.name} (${p.price})
                 </h2>
               </Carousel.Caption>
             </Link>
@@ -39,6 +36,8 @@ const ProductCarousel: React.FC<ProductCarouselProps> = () => {
         ))}
     </Carousel>
   );
+
+  return <>{loading ? loader : error ? message : productCarousel}</>;
 };
 
 export default ProductCarousel;

@@ -16,6 +16,9 @@ import {
   ProductUpdateSuccessAction,
   ProductUpdateFailAction,
   ProductUpdateResetAction,
+  ProductTopFailAction,
+  ProductTopRequestAction,
+  ProductTopSuccessAction,
 } from './productActions';
 
 import {
@@ -87,7 +90,10 @@ export type ProductAction =
   | ProductUpdateRequestAction
   | ProductUpdateSuccessAction
   | ProductUpdateFailAction
-  | ProductUpdateResetAction;
+  | ProductUpdateResetAction
+  | ProductTopFailAction
+  | ProductTopRequestAction
+  | ProductTopSuccessAction;
 
 export type CartAction =
   | CartAddItemAction
