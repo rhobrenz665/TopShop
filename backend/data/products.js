@@ -1,27 +1,15 @@
 const products = [
   {
-    name: 'Airpods Wireless Bluetooth Headphones',
-    image: '/images/airpods.jpg',
+    name: 'Acer Nitro 5 ',
+    image: '/images/acer.jpg',
     description:
-      'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
-    brand: 'Apple',
+      'Graphics || NVIDIA® GeForce® GTX 1650 Ti with 4 GB GDDR6 memory, supporting || NVIDIA® CUDA® Cores || NVIDIA® GeForce Experience || NVIDIA® Ansel || NVIDIA® Highlights || NVIDIA® G-SYNC || NVIDIA® Optimus Technology || NVIDIA® BatteryBoost || NVIDIA® WhisperMode || Game Ready Drivers || Microsoft® DirectX® 12 API, Vulkan API, OpenGL 4/5 || eDP, DisplayPort 1.4, HDMI 2.0b ',
+    brand: 'Acer',
     category: 'Electronics',
-    price: 89.99,
+    price: 950.99,
     countInStock: 3,
-    rating: 0,
-    numReviews: 0,
-  },
-  {
-    name: 'iPhone 11 Pro 256GB Memory',
-    image: '/images/phone.jpg',
-    description:
-      'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
-    brand: 'Apple',
-    category: 'Electronics',
-    price: 599.99,
-    countInStock: 10,
-    rating: 0,
-    numReviews: 0,
+    rating: 5,
+    numReviews: 1,
   },
   {
     name: 'Cannon EOS 80D DSLR Camera',
@@ -44,33 +32,57 @@ const products = [
     category: 'Electronics',
     price: 399.99,
     countInStock: 10,
+    rating: 5,
+    numReviews: 1,
+  },
+  {
+    name: 'Geekvape Aegis Boost',
+    image: '/images/aegis.jpg',
+    description:
+      'Geekvape Aegis Boost Pod Mod Kit, made of Plastic & Silicone & Leather & Zinc Alloy, is powered by single 18650 battery (batteries sold separately) with adjustable 5-100W output. Geekvape Aegis Boost Pro Pod Kit is equipped with 0.96 inch TFT color screen to show vaping data clearly',
+    brand: 'Geekvape Aegis Boost',
+    category: 'Electronics',
+    price: 40.99,
+    countInStock: 10,
     rating: 0,
     numReviews: 0,
   },
   {
-    name: 'Logitech G-Series Gaming Mouse',
-    image: '/images/mouse.jpg',
+    name: 'Rakk Kimat',
+    image: '/images/keyboard.jpg',
     description:
-      'Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience',
-    brand: 'Logitech',
+      ' Mechanical Gaming Keyboard, Simple yet Elegant Designed Keyboards Rakk Kimat XT-LE Keyboard Mechanical, Outemu Blue for Clicky Sound while typing, 14 Lighting Modes, Mechanical Keyboard Gaming with RGB',
+    brand: 'Rakk',
     category: 'Electronics',
-    price: 49.99,
+    price: 22.99,
     countInStock: 7,
     rating: 0,
     numReviews: 0,
   },
   {
-    name: 'Amazon Echo Dot 3rd Generation',
-    image: '/images/alexa.jpg',
+    name: 'Rakk APORO',
+    image: '/images/aporo.jpg',
     description:
-      'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
-    brand: 'Amazon',
+      'Rakk Aporo RGB Gaming Mouse Usb 4000 dpi Avago 3050 Best Seller for iCafe, Office Mouse and FPS Games like PUBG',
+    brand: 'Rakk',
     category: 'Electronics',
-    price: 29.99,
+    price: 12.99,
     countInStock: 0,
     rating: 0,
     numReviews: 0,
   },
-]
+  {
+    name: 'SpecterPro XL32ST 32" 144hz Curved Monitor with AMD Freesync',
+    image: '/images/specter.jpg',
+    description:
+      'SpecterPro XL32ST 32" 144hz Curved Monitor with AMD Freesync, Specter Pro Curved Gaming Monitor, 4ms response rate, Full High Definition resolution with VA Panel, 100×100 Vesa Wall mount, HDMI+Display Port Compatible for GPU AMD RX and Intel GTX and RTX',
+    brand: 'Specter',
+    category: 'Electronics',
+    price: 68.99,
+    countInStock: 4,
+    rating: 4,
+    numReviews: 2,
+  },
+];
 
-export default products
+export default products;
